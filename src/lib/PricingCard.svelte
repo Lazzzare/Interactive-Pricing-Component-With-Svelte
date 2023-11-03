@@ -2,7 +2,7 @@
   import Check from "./../images/icon-check.svg";
 
   let fill = false;
-  //   PROPS
+  // PROPS
   export let rangeValue: number;
   export let initialRange: number;
   export let initialpageViews: number;
@@ -11,15 +11,12 @@
   const handleClick = () => {
     fill = !fill;
     monthly = !monthly;
-    if (!monthly) {
-      rangeValue = rangeValue * 2;
-      initialRange = initialRange * 2;
-      initialpageViews = initialpageViews * 10;
-    } else {
-      rangeValue = rangeValue / 2;
-      initialRange = initialRange / 2;
-      initialpageViews = initialpageViews / 10;
-    }
+
+    const scaleFactor = monthly ? 0.5 : 2;
+
+    rangeValue *= scaleFactor;
+    initialRange *= scaleFactor;
+    initialpageViews *= scaleFactor;
   };
 
   let previousValue: number = 0;
@@ -54,16 +51,19 @@
     </h2>
     <input
       type="range"
-      class="w-full"
+      class="myrange w-full"
       min={0}
-      value={rangeValue}
-      on:change={updateValues}
+      max={5}
+      bind:value={rangeValue}
+      on:input={updateValues}
     />
     <span
       class={`text-[#293356] text-[32px] font-extrabold tracking-[-0.8px] ${
         monthly ? "after:content-['/month']" : "after:content-['/year']"
-      } after:text-[#32343b] after:pl-2 after:text-sm`}>${initialRange}.00</span
+      } after:text-[#32343b] after:pl-2 after:text-sm`}
     >
+      ${initialRange}.00
+    </span>
   </div>
   <div class="pb-10 items-center text-center mx-auto flex justify-center">
     <!-- Monthly/Yearly -->
@@ -96,8 +96,7 @@
         </svg>
       </button>
       <h3
-        class="after:content-['-25%'] after:bg-[#FEEDE8] after:rounded-lg md:after:text-[12px] after:px-[7px] after:py-[2px]
-        after:text-[#FF8D68] after:font-extrabold after:text-[10px] after:ml-1"
+        class="after:content-['-25%'] after:bg-[#FEEDE8] after:rounded-lg md:after:text-[12px] after:px-[7px] after:py-[2px] after:text-[#FF8D68] after:font-extrabold after:text-[10px] after:ml-1"
       >
         Yearly Billing
       </h3>
