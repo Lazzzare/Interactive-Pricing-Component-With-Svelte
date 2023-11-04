@@ -1,6 +1,6 @@
 # Interactive Pricing Component
 
-<img src="./src/images/background.PNG" alt="background" width="640px">
+<img src="./src/images/background.PNG" alt="background">
 
 # Getting Started
 
